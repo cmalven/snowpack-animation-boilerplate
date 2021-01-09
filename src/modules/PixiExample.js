@@ -12,11 +12,12 @@ class PixiExample {
     this.appContainer = document.querySelector(this.options.appContainerSelector);
     this.app = null;
     this.particleContainer = null;
+    this.iter = 0;
 
     // Settings
     this.settings = {
       // Tweakable settings go here
-      rotationSpeed: 0.01,
+      scalePeriod: 500,
     };
 
     this.init();
@@ -34,7 +35,7 @@ class PixiExample {
     const folder = window.APP.gui.setFolder('PixiExample');
     folder.open();
 
-    window.APP.gui.add(this.settings, 'rotationSpeed', 0.005, 0.3);
+    window.APP.gui.add(this.settings, 'scalePeriod', 1, 1000);
   }
 
   createApp = () => {
@@ -57,28 +58,38 @@ class PixiExample {
     });
     this.app.stage.addChild(this.particleContainer);
 
-    const path = [0, 0, 0, 50, 50, 0, 0, 0];
     const textureGraphic = new PIXI.Graphics();
     textureGraphic.lineStyle(0);
     textureGraphic.beginFill(0x1a1b1b);
-    textureGraphic.drawPolygon(path);
+    textureGraphic.drawEllipse(0, 0, 30, 30);
     textureGraphic.endFill();
     let spriteTexture = this.app.renderer.generateTexture(textureGraphic);
 
-    const itemCount = 20;
+    const itemCount = 200;
     for (let idx = 0, length = itemCount; idx < length; idx++) {
       const sprite = new PIXI.Sprite(spriteTexture);
+      sprite.baseScale = Math.random();
       sprite.anchor.set(0.5, 0.5);
-      this.particleContainer.addChild(sprite);
       sprite.position.x = Math.random() * this.app.view.width;
       sprite.position.y = Math.random() * this.app.view.height;
+      this.particleContainer.addChild(sprite);
     }
   }
 
-  render = (delta) => {
-    this.particleContainer.children.forEach(child => {
-      child.rotation += this.settings.rotationSpeed;
+  updateItems = () => {
+    this.particleContainer.children.forEach(sprite => {
+      const iteration = this.iter + sprite.baseScale * this.settings.scalePeriod;
+      const amplitude = 0.8;
+      const period = this.settings.scalePeriod;
+
+      const scaleEffect = amplitude * Math.sin((Math.PI * 2) * (iteration / period));
+      sprite.scale.x = sprite.scale.y = scaleEffect + sprite.baseScale;
     });
+  }
+
+  render = () => {
+    this.iter++;
+    this.updateItems();
   }
 }
 
