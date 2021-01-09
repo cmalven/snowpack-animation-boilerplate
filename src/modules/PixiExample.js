@@ -45,7 +45,7 @@ class PixiExample {
       height: 1000,
     });
     this.appContainer.appendChild(this.app.view);
-    this.app.ticker.add(this.render);
+    this.app.ticker.add(this.update);
   }
 
   createItems = () => {
@@ -87,7 +87,7 @@ class PixiExample {
     });
   }
 
-  render = () => {
+  update = () => {
     this.iter++;
     this.updateItems();
   }

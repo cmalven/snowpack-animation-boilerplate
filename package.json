@@ -11,7 +11,8 @@
     "gsap": "^3.5.1",
     "normalize.css": "^8.0.1",
     "pixi.js": "^5.3.7",
-    "reset.css": "^2.0.2"
+    "reset.css": "^2.0.2",
+    "three": "^0.124.0"
   },
   "devDependencies": {
     "@malven/eslint-config": "^1.0.1",
