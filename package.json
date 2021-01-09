@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "start": "snowpack dev --polyfill-node",
+    "build": "snowpack build --polyfill-node",
+    "test": "echo \"This template does not include a test runner by default.\" && exit 0",
+    "lint-scripts": "eslint --fix"
+  },
+  "dependencies": {
+    "@malven/gui": "^1.4.0",
+    "canvas-sketch-util": "^1.10.0",
+    "gsap": "^3.5.1",
+    "normalize.css": "^8.0.1",
+    "pixi.js": "^5.3.7",
+    "reset.css": "^2.0.2"
+  },
+  "devDependencies": {
+    "@malven/eslint-config": "^1.0.1",
+    "@snowpack/plugin-sass": "^1.2.0",
+    "@snowpack/plugin-webpack": "^2.2.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react": "^7.22.0",
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3",
+    "snowpack": "^2.18.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint-scripts"
+    ]
+  }
+}
