@@ -6,7 +6,7 @@
     "lint-scripts": "eslint --fix"
   },
   "dependencies": {
-    "@malven/gui": "^1.4.0",
+    "@malven/gui": "^1.4.1",
     "canvas-sketch-util": "^1.10.0",
     "gsap": "^3.5.1",
     "normalize.css": "^8.0.1",
