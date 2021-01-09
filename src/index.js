@@ -1,7 +1,6 @@
 import './styles/index.scss';
 
-// import PixiExample from './modules/PixiExample';
-import ThreeExample from './modules/ThreeExample';
+import PixiExample from './modules/PixiExample';
 
 window.APP = window.APP || {
   devMode: true,
@@ -20,5 +19,5 @@ if (window.APP.devMode) {
 
 Promise.all(readyPromises).then(() => {
   // Initialize custom code…
-  new ThreeExample();
+  new PixiExample();
 });
