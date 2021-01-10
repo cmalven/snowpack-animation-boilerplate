@@ -126,7 +126,7 @@ class ThreeBasicExample {
     for (let idx = 0, length = numItems; idx < length; idx++) {
       positions[idx] = Math.random() * 100 - 50;
       positions[idx + 1] = Math.random() * 100 - 50;
-      positions[idx + 2] = Math.random() * 100- 50;
+      positions[idx + 2] = Math.random() * 100 - 50;
       sizes[idx] = Math.random();
       indexes[idx] = idx;
     }
