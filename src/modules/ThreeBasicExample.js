@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
  * Boilerplate module using THREE.js
  */
 
-class ThreeExample {
+class ThreeBasicExample {
   constructor(options = {
     appContainerSelector: '[data-app-container]',
   }) {
@@ -22,7 +22,6 @@ class ThreeExample {
 
     // Settings
     this.settings = {
-      // Tweakable settings go here
       cameraDistance: 5,
       scalePeriod: 500,
       bgColor: 0x212322,
@@ -117,4 +116,4 @@ class ThreeExample {
   }
 }
 
-export default ThreeExample;
+export default ThreeBasicExample;

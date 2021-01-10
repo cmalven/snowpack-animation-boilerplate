@@ -16,7 +16,6 @@ class PixiExample {
 
     // Settings
     this.settings = {
-      // Tweakable settings go here
       scalePeriod: 250,
     };
 
