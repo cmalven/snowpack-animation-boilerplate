@@ -22,7 +22,7 @@ class ThreeBasicExample {
     this.controls;
     this.geometry;
     this.particles;
-    this.particleTexture;
+    this.pointTexture;
     this.uniforms;
 
     // Settings
@@ -36,8 +36,9 @@ class ThreeBasicExample {
     this.init();
   }
 
-  init = () => {
+  init = async() => {
     this.createGui();
+    await this.loadTexture();
     this.createUniforms();
     this.createApp();
     this.createItems();
@@ -54,8 +55,14 @@ class ThreeBasicExample {
     window.APP.gui.add(this.settings, 'maxSize', 1, 90);
   }
 
+  loadTexture = async() => {
+    this.pointTexture = await new THREE.TextureLoader().load('https://assets.codepen.io/66496/dot.png');
+  }
+
   createUniforms = () => {
-    this.uniforms = {};
+    this.uniforms = {
+      pointTexture: { value: this.pointTexture },
+    };
     this.updateUniforms();
   }
 
