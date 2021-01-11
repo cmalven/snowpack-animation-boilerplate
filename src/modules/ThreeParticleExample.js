@@ -132,9 +132,9 @@ class ThreeBasicExample {
     }
 
     // Set buffer attributes
-    this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    this.geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1).setUsage(THREE.DynamicDrawUsage));
-    this.geometry.setAttribute('index', new THREE.Float32BufferAttribute(indexes, 1).setUsage(THREE.DynamicDrawUsage));
+    this.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    this.geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1).setUsage(THREE.DynamicDrawUsage));
+    this.geometry.setAttribute('index', new THREE.BufferAttribute(indexes, 1).setUsage(THREE.DynamicDrawUsage));
     this.particles = new THREE.Points(this.geometry, shaderMaterial);
 
     // Add particles to the scene
