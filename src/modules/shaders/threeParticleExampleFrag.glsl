@@ -1,6 +1,9 @@
 uniform sampler2D pointTexture;
 varying float vAlpha;
 
+// From THREE…
+// uniform vec3 cameraPosition;
+
 void main() {
   gl_FragColor = vec4(
     1.0,
