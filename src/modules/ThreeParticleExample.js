@@ -7,7 +7,7 @@ import fragShader from './shaders/threeParticleExampleFrag.glsl';
  * Boilerplate module using THREE.js
  */
 
-class ThreeBasicExample {
+class ThreeParticleExample {
   constructor(options = {
     appContainerSelector: '[data-app-container]',
   }) {
@@ -158,4 +158,4 @@ class ThreeBasicExample {
   }
 }
 
-export default ThreeBasicExample;
+export default ThreeParticleExample;
