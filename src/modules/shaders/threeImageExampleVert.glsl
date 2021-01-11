@@ -4,6 +4,7 @@ varying vec2 vUv;
 // From THREE…
 // uniform vec3 cameraPosition;
 // attribute vec3 position;
+// attribute vec2 uv;
 
 void main() {
   vec3 adjustedPosition = vec3(

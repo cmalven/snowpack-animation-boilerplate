@@ -8,6 +8,7 @@ uniform float maxSize;
 // From THREE…
 // uniform vec3 cameraPosition;
 // attribute vec3 position;
+// attribute vec2 uv;
 
 float map_to_range(float value, float inMin, float inMax, float outMin, float outMax) {
   return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
