@@ -1,4 +1,3 @@
-export default `
 attribute float size;
 attribute float index;
 varying float vAlpha;
@@ -25,4 +24,3 @@ void main() {
 
   gl_Position = projectionMatrix * mvPosition;
 }
-`;

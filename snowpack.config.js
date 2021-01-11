@@ -12,6 +12,9 @@ module.exports = {
         style: 'compressed',
       },
     }],
+    ['snowpack-plugin-raw-file-loader', {
+      exts: ['.glsl'],
+    }],
   ],
   devOptions: {
     port: 3333,

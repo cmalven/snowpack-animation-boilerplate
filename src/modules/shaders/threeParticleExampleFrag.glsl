@@ -1,4 +1,3 @@
-export default `
 uniform sampler2D pointTexture;
 varying float vAlpha;
 
@@ -10,4 +9,3 @@ void main() {
     vAlpha * texture2D(pointTexture, gl_PointCoord).a
   );
 }
-`;
