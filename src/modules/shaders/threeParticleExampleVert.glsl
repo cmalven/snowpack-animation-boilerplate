@@ -12,7 +12,7 @@ float map_to_range(float value, float inMin, float inMax, float outMin, float ou
 void main() {
   vec3 adjustedPosition = vec3(
     position.x,
-    position.y + sin(iter * 0.02 + index),
+    position.y + sin(iter * 0.02 + index) * pow(1.1, size * 10.0),
     position.z
   );
 
