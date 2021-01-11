@@ -118,15 +118,18 @@ class ThreeBasicExample {
     });
 
     // Set particle variables
-    const numItems = 1000;
+    const numItems = 800;
     const positions = new Float32Array(numItems * 3);
     const sizes = new Float32Array(numItems);
     const indexes = new Float32Array(numItems);
 
     for (let idx = 0, length = numItems; idx < length; idx++) {
-      positions[idx] = Math.random() * 100 - 50;
-      positions[idx + 1] = Math.random() * 100 - 50;
-      positions[idx + 2] = Math.random() * 100 - 50;
+      const x = Math.random() * 100 - 50;
+      const y = Math.random() * 100 - 50;
+      const z = Math.random() * 100 - 50;
+      positions[idx*3] = x;
+      positions[idx*3 + 1] = y;
+      positions[idx*3 + 2] = z;
       sizes[idx] = Math.random();
       indexes[idx] = idx;
     }
