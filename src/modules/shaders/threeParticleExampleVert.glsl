@@ -29,8 +29,9 @@ void main() {
   vec4 mvPosition = modelViewMatrix * vec4(adjustedPosition, 1.0);
 
   float maxPointDistance = 30.0;
-  float pointDistance = lerp(30.0, 0.0, distance(adjustedPosition.xy, currentMouse) / maxPointDistance);
-  gl_PointSize = map_to_range(size, 0.0, 1.0, minSize, maxSize) + pointDistance;
+  float pointDistanceScale = lerp(30.0, 0.0, distance(adjustedPosition.xy, currentMouse) / maxPointDistance);
+  float maxPointSize = 60.0;
+  gl_PointSize = maxPointSize*size - distance(adjustedPosition, cameraPosition)*0.2 + pointDistanceScale;
 
   vAlpha = map_to_range(size, 0.0, 1.0, 0.2, 1.0);
 
