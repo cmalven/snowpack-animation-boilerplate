@@ -25,12 +25,17 @@ class ThreeParticleExample {
     this.pointTexture;
     this.uniforms;
 
+    // Mouse
+    this.currentMouse = { x: 0, y: 0 };
+    this.targetMouse = { x: 0, y: 0 };
+
     // Settings
     this.settings = {
       cameraDistance: 100,
       minSize: 5,
       maxSize: 25,
       bgColor: 0x212322,
+      mouseEase: 0.05,
     };
 
     this.init();
@@ -42,6 +47,7 @@ class ThreeParticleExample {
     this.createUniforms();
     this.createApp();
     this.createItems();
+    this.addEventListeners();
     this.update();
   }
 
@@ -53,6 +59,7 @@ class ThreeParticleExample {
 
     window.APP.gui.add(this.settings, 'minSize', 1, 90);
     window.APP.gui.add(this.settings, 'maxSize', 1, 90);
+    window.APP.gui.add(this.settings, 'mouseEase', 0.001, 1);
   }
 
   loadTexture = async() => {
@@ -62,6 +69,7 @@ class ThreeParticleExample {
   createUniforms = () => {
     this.uniforms = {
       pointTexture: { value: this.pointTexture },
+      currentMouse: { value: this.currentMouse },
     };
     this.updateUniforms();
   }
@@ -144,12 +152,41 @@ class ThreeParticleExample {
     this.scene.add(this.particles);
   }
 
+  addEventListeners = () => {
+    this.appContainer.addEventListener('mousemove', this.onMouseMove);
+  }
+
+  onMouseMove = evt => {
+    // Project mouse position onto Z plane based on camera
+    let vec = new THREE.Vector3();
+    let pos = new THREE.Vector3();
+    vec.set(
+      (evt.clientX / window.innerWidth) * 2 - 1,
+      - (evt.clientY / window.innerHeight) * 2 + 1,
+      0.5);
+    vec.unproject(this.camera);
+    vec.sub(this.camera.position).normalize();
+    let distance = - this.camera.position.z / vec.z;
+    pos.copy(this.camera.position).add(vec.multiplyScalar(distance));
+
+    this.targetMouse = { x: pos.x, y: pos.y };
+  }
+
+  updateMouse = () => {
+    const mouseDiffX = (this.targetMouse.x - this.currentMouse.x) * this.settings.mouseEase;
+    const mouseDiffY = (this.targetMouse.y - this.currentMouse.y) * this.settings.mouseEase;
+
+    this.currentMouse.x += mouseDiffX;
+    this.currentMouse.y += mouseDiffY;
+  }
+
   updateItems = () => {
 
   }
 
   update = () => {
     this.iter++;
+    this.updateMouse();
     this.updateUniforms();
     this.updateItems();
     this.renderer.render(this.scene, this.camera);

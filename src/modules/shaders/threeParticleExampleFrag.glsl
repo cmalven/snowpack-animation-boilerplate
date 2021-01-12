@@ -1,4 +1,5 @@
 uniform sampler2D pointTexture;
+uniform vec2 currentMouse;
 varying float vAlpha;
 
 // From THREE…

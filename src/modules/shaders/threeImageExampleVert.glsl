@@ -16,12 +16,13 @@ float lerp(float start, float end, float pct) {
 }
 
 void main() {
-  float dist = lerp(1.0, 0.0, distance(uv.x, currentMouse.x));
+  float maxDist = 40.0;
+  float dist = lerp(1.0, 0.0, distance(position.xy, currentMouse) / maxDist);
 
   vec3 adjustedPosition = vec3(
     position.x,
     position.y,
-    position.z + sin(iter * 0.04 + uv.x*10.0) * dist * 10.0
+    position.z + sin(iter * 0.04 + uv.x*10.0) * dist * 25.0
   );
 
   vec4 mvPosition = modelViewMatrix * vec4(adjustedPosition, 1.0);

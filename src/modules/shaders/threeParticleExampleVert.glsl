@@ -4,11 +4,16 @@ varying float vAlpha;
 uniform float iter;
 uniform float minSize;
 uniform float maxSize;
+uniform vec2 currentMouse;
 
 // From THREE…
 // uniform vec3 cameraPosition;
 // attribute vec3 position;
 // attribute vec2 uv;
+
+float lerp(float start, float end, float pct) {
+  return (start + (end - start) * pct);
+}
 
 float map_to_range(float value, float inMin, float inMax, float outMin, float outMax) {
   return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
@@ -23,7 +28,9 @@ void main() {
 
   vec4 mvPosition = modelViewMatrix * vec4(adjustedPosition, 1.0);
 
-  gl_PointSize = map_to_range(size, 0.0, 1.0, minSize, maxSize);
+  float maxPointDistance = 30.0;
+  float pointDistance = lerp(30.0, 0.0, distance(adjustedPosition.xy, currentMouse) / maxPointDistance);
+  gl_PointSize = map_to_range(size, 0.0, 1.0, minSize, maxSize) + pointDistance;
 
   vAlpha = map_to_range(size, 0.0, 1.0, 0.2, 1.0);
 

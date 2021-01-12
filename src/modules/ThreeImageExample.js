@@ -33,7 +33,7 @@ class ThreeImageExample {
     this.settings = {
       cameraDistance: 100,
       bgColor: 0x212322,
-      mouseEase: 0.2,
+      mouseEase: 0.05,
     };
 
     this.init();
@@ -134,7 +134,19 @@ class ThreeImageExample {
   }
 
   onMouseMove = evt => {
-    this.targetMouse = { x: evt.offsetX / this.appContainer.offsetWidth, y: evt.offsetY / this.appContainer.offsetWidth };
+    // Project mouse position onto Z plane based on camera
+    let vec = new THREE.Vector3();
+    let pos = new THREE.Vector3();
+    vec.set(
+      (evt.clientX / window.innerWidth) * 2 - 1,
+      - (evt.clientY / window.innerHeight) * 2 + 1,
+      0.5);
+    vec.unproject(this.camera);
+    vec.sub(this.camera.position).normalize();
+    let distance = - this.camera.position.z / vec.z;
+    pos.copy(this.camera.position).add(vec.multiplyScalar(distance));
+
+    this.targetMouse = { x: pos.x, y: pos.y };
   }
 
   updateMouse = () => {
