@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     '@snowpack/plugin-webpack',
+    '@snowpack/plugin-babel',
     ['@snowpack/plugin-sass', {
       native: true,
       compilerOptions: {
