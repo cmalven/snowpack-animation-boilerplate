@@ -25,10 +25,15 @@ class ThreeImageExample {
     this.geometry;
     this.mesh;
 
+    // Mouse
+    this.currentMouse = { x: 0, y: 0 };
+    this.targetMouse = { x: 0, y: 0 };
+
     // Settings
     this.settings = {
       cameraDistance: 100,
       bgColor: 0x212322,
+      mouseEase: 0.2,
     };
 
     this.init();
@@ -40,6 +45,7 @@ class ThreeImageExample {
     this.createUniforms();
     this.createApp();
     this.createItems();
+    this.addEventListeners();
     this.update();
   }
 
@@ -49,7 +55,7 @@ class ThreeImageExample {
     const folder = window.APP.gui.setFolder('ThreeExample');
     folder.open();
 
-    // window.APP.gui.add(this.settings, 'minSize', 1, 90);
+    window.APP.gui.add(this.settings, 'mouseEase', 0.001, 1);
   }
 
   loadTexture = async() => {
@@ -66,6 +72,7 @@ class ThreeImageExample {
   updateUniforms = () => {
     Object.assign(this.uniforms, {}, {
       iter: { value: this.iter },
+      currentMouse: { value: this.currentMouse },
     });
   }
 
@@ -122,12 +129,29 @@ class ThreeImageExample {
     this.scene.add(this.mesh);
   }
 
+  addEventListeners = () => {
+    this.appContainer.addEventListener('mousemove', this.onMouseMove);
+  }
+
+  onMouseMove = evt => {
+    this.targetMouse = { x: evt.offsetX / this.appContainer.offsetWidth, y: evt.offsetY / this.appContainer.offsetWidth };
+  }
+
+  updateMouse = () => {
+    const mouseDiffX = (this.targetMouse.x - this.currentMouse.x) * this.settings.mouseEase;
+    const mouseDiffY = (this.targetMouse.y - this.currentMouse.y) * this.settings.mouseEase;
+
+    this.currentMouse.x += mouseDiffX;
+    this.currentMouse.y += mouseDiffY;
+  }
+
   updateItems = () => {
 
   }
 
   update = () => {
     this.iter++;
+    this.updateMouse();
     this.updateUniforms();
     this.updateItems();
     this.renderer.render(this.scene, this.camera);

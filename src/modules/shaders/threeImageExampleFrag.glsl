@@ -1,5 +1,6 @@
 uniform sampler2D imageTexture;
 uniform float iter;
+uniform vec2 currentMouse;
 varying vec2 vUv;
 
 // From THREE…
