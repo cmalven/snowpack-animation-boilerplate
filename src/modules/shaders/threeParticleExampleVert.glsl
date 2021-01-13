@@ -1,10 +1,11 @@
 attribute float size;
 attribute float index;
-varying float vAlpha;
 uniform float iter;
 uniform float minSize;
 uniform float maxSize;
 uniform vec2 currentMouse;
+varying float vAlpha;
+varying vec3 vPosition;
 
 // From THREE…
 // uniform vec3 cameraPosition;
@@ -34,6 +35,7 @@ void main() {
   gl_PointSize = maxPointSize*size - distance(adjustedPosition, cameraPosition)*0.2 + pointDistanceScale;
 
   vAlpha = map_to_range(size, 0.0, 1.0, 0.2, 1.0);
+  vPosition = adjustedPosition;
 
   gl_Position = projectionMatrix * mvPosition;
 }

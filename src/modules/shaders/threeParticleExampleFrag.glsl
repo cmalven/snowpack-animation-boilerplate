@@ -1,6 +1,7 @@
 uniform sampler2D pointTexture;
 uniform vec2 currentMouse;
 varying float vAlpha;
+varying vec3 vPosition;
 
 // From THREE…
 // uniform vec3 cameraPosition;

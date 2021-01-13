@@ -1,6 +1,7 @@
 uniform float iter;
 uniform vec2 currentMouse;
 varying vec2 vUv;
+varying vec3 vPosition;
 
 // From THREE…
 // uniform vec3 cameraPosition;
@@ -28,6 +29,7 @@ void main() {
   vec4 mvPosition = modelViewMatrix * vec4(adjustedPosition, 1.0);
 
   vUv = uv;
+  vPosition = adjustedPosition;
 
   gl_Position = projectionMatrix * mvPosition;
 }
