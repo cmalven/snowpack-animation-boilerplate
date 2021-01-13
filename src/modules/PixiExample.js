@@ -59,7 +59,7 @@ class PixiExample {
 
     const textureGraphic = new PIXI.Graphics();
     textureGraphic.lineStyle(0);
-    textureGraphic.beginFill(0x1a1b1b);
+    textureGraphic.beginFill(0xeeeeee);
     textureGraphic.drawEllipse(0, 0, 30, 30);
     textureGraphic.endFill();
     let spriteTexture = this.app.renderer.generateTexture(textureGraphic);
