@@ -32,8 +32,8 @@ void main() {
 
   float maxPointDistance = 30.0;
   float pointDistanceScale = lerp(30.0, 0.0, distance(adjustedPosition.xy, currentMouse) / maxPointDistance);
-  float maxPointSize = 60.0;
-  gl_PointSize = maxPointSize*size - distance(adjustedPosition, cameraPosition)*0.2 + pointDistanceScale;
+  float maxPointSize = maxSize;
+  gl_PointSize = maxPointSize*size - distance(adjustedPosition, cameraPosition)*0.2 + pointDistanceScale + minSize;
 
   vAlpha = map_to_range(size, 0.0, 1.0, 0.2, 1.0);
   vPosition = adjustedPosition;

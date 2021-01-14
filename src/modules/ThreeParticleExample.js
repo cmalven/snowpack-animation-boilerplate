@@ -34,7 +34,7 @@ class ThreeParticleExample {
     this.settings = {
       cameraDistance: 100,
       minSize: 5,
-      maxSize: 25,
+      maxSize: 50,
       bgColor: 0x212322,
       mouseEase: 0.05,
     };
