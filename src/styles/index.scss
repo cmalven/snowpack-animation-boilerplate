@@ -1,7 +1,16 @@
 @use 'node_modules/normalize.css/normalize.css';
 @use 'node_modules/reset.css/reset.css';
+@use 'node_modules/sass-mq/mq';
 
 @use 'base/base';
+
+$mq-breakpoints: (
+  small: 500px,
+  medium: 768px,
+  large: 1024px,
+  xlarge: 1280px,
+  full: 1440px,
+);
 
 [data-app-container] {
   width: 80vmin;
