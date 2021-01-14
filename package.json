@@ -9,6 +9,7 @@
     "@malven/gui": "^1.4.1",
     "canvas-sketch-util": "^1.10.0",
     "gsap": "^3.5.1",
+    "nice-color-palettes": "^3.0.0",
     "normalize.css": "^8.0.1",
     "pixi.js": "^5.3.7",
     "reset.css": "^2.0.2",

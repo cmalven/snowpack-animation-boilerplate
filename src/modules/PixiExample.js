@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import colors from 'nice-color-palettes';
 
 /**
  * Boilerplate module using PIXI.js
@@ -57,6 +58,9 @@ class PixiExample {
     });
     this.app.stage.addChild(this.particleContainer);
 
+    // Get the color palette
+    const palette = colors[Math.floor(Math.random() * 50)];
+
     const textureGraphic = new PIXI.Graphics();
     textureGraphic.lineStyle(0);
     textureGraphic.beginFill(0xeeeeee);
@@ -66,11 +70,13 @@ class PixiExample {
 
     const itemCount = 200;
     for (let idx = 0, length = itemCount; idx < length; idx++) {
+      const randColor = palette[Math.floor(Math.random() * palette.length)];
       const sprite = new PIXI.Sprite(spriteTexture);
       sprite.baseScale = Math.random();
       sprite.anchor.set(0.5, 0.5);
       sprite.position.x = Math.random() * this.app.view.width;
       sprite.position.y = Math.random() * this.app.view.height;
+      sprite.tint = PIXI.utils.string2hex(randColor);
       this.particleContainer.addChild(sprite);
     }
   }
