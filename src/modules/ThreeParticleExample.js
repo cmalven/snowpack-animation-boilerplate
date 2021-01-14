@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import colorPalettes from 'nice-color-palettes';
 import vertShader from './shaders/threeParticleExampleVert.glsl';
 import fragShader from './shaders/threeParticleExampleFrag.glsl';
 
@@ -125,27 +126,37 @@ class ThreeParticleExample {
       vertexColors: true,
     });
 
+    // Get the color palette
+    const palette = colorPalettes[Math.floor(Math.random() * 50)];
+
     // Set particle variables
     const numItems = 800;
     const positions = new Float32Array(numItems * 3);
     const sizes = new Float32Array(numItems);
     const indexes = new Float32Array(numItems);
+    const colors = new Float32Array(numItems * 3);
 
     for (let idx = 0, length = numItems; idx < length; idx++) {
       const x = Math.random() * 100 - 50;
       const y = Math.random() * 100 - 50;
       const z = Math.random() * 100 - 50;
+      const randColor = palette[Math.floor(Math.random() * palette.length)];
+      const color = new THREE.Color(randColor);
       positions[idx*3] = x;
       positions[idx*3 + 1] = y;
       positions[idx*3 + 2] = z;
       sizes[idx] = Math.random();
       indexes[idx] = idx;
+      colors[idx*3] = color.r;
+      colors[idx*3 + 1] = color.g;
+      colors[idx*3 + 2] = color.b;
     }
 
     // Set buffer attributes
     this.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     this.geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1).setUsage(THREE.DynamicDrawUsage));
     this.geometry.setAttribute('index', new THREE.BufferAttribute(indexes, 1).setUsage(THREE.DynamicDrawUsage));
+    this.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     this.particles = new THREE.Points(this.geometry, shaderMaterial);
 
     // Add particles to the scene

@@ -6,6 +6,7 @@ uniform float maxSize;
 uniform vec2 currentMouse;
 varying float vAlpha;
 varying vec3 vPosition;
+varying vec3 vColor;
 
 // From THREE…
 // uniform vec3 cameraPosition;
@@ -36,6 +37,7 @@ void main() {
 
   vAlpha = map_to_range(size, 0.0, 1.0, 0.2, 1.0);
   vPosition = adjustedPosition;
+  vColor = color;
 
   gl_Position = projectionMatrix * mvPosition;
 }
