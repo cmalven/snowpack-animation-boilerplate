@@ -20,9 +20,4 @@ module.exports = {
   devOptions: {
     port: 3333,
   },
-  install: [],
-  installOptions: {},
-  buildOptions: {},
-  proxy: {},
-  alias: {},
 };
