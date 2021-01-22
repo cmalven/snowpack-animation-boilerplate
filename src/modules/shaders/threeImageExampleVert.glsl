@@ -4,6 +4,8 @@ varying vec2 vUv;
 varying vec3 vPosition;
 
 // From THREE…
+// uniform mat4 projectionMatrix;
+// uniform mat4 modelViewMatrix;
 // uniform vec3 cameraPosition;
 // attribute vec3 position;
 // attribute vec2 uv;
