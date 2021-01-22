@@ -116,7 +116,7 @@ class ThreeImageExample {
       uniforms: this.uniforms,
       vertexShader: vertShader,
       fragmentShader: fragShader,
-      depthTest: false,
+      depthTest: true,
       transparent: true,
       vertexColors: true,
       side: THREE.DoubleSide,
