@@ -59,7 +59,7 @@ class ThreeImageExample {
   }
 
   loadTexture = async() => {
-    this.imageTexture = await new THREE.TextureLoader().load('https://assets.codepen.io/66496/temple-ranch-hero.jpg');
+    this.imageTexture = await new THREE.TextureLoader().load('/assets/chicago.jpg');
   }
 
   createUniforms = () => {
@@ -107,7 +107,7 @@ class ThreeImageExample {
 
   createItems = () => {
     // Create the geometry
-    const imageRatio = 1304 / 2000;
+    const imageRatio = 1333 / 2000;
     const imageWidth = 60;
     this.geometry = new THREE.PlaneBufferGeometry(imageWidth, imageWidth * imageRatio, 16 * 2, 9 * 2);
 
