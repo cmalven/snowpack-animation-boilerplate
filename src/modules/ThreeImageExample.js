@@ -13,7 +13,10 @@ class ThreeImageExample {
   }) {
     this.options = options;
     this.appContainer = document.querySelector(this.options.appContainerSelector);
-    this.iter = 0;
+
+    // Time
+    this.clock = new THREE.Clock();
+    this.time = 0;
 
     // THREE items
     this.renderer;
@@ -71,7 +74,7 @@ class ThreeImageExample {
 
   updateUniforms = () => {
     Object.assign(this.uniforms, {}, {
-      iter: { value: this.iter },
+      time: { value: this.time },
       currentMouse: { value: this.currentMouse },
     });
   }
@@ -162,13 +165,16 @@ class ThreeImageExample {
   }
 
   update = () => {
-    this.iter++;
+    if (window.APP.stats) window.APP.stats.begin();
+    this.time = this.clock.getElapsedTime();
+
     this.updateMouse();
     this.updateUniforms();
     this.updateItems();
+
     this.renderer.render(this.scene, this.camera);
     window.requestAnimationFrame(this.update);
-
+    if (window.APP.stats) window.APP.stats.end();
   }
 }
 

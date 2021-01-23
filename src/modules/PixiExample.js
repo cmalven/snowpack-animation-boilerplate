@@ -13,11 +13,13 @@ class PixiExample {
     this.appContainer = document.querySelector(this.options.appContainerSelector);
     this.app = null;
     this.particleContainer = null;
-    this.iter = 0;
+
+    // Time
+    this.time = 0;
 
     // Settings
     this.settings = {
-      scalePeriod: 250,
+      scalePeriod: 5,
     };
 
     this.init();
@@ -35,7 +37,7 @@ class PixiExample {
     const folder = window.APP.gui.setFolder('PixiExample');
     folder.open();
 
-    window.APP.gui.add(this.settings, 'scalePeriod', 1, 1000);
+    window.APP.gui.add(this.settings, 'scalePeriod', 0.5, 20);
   }
 
   createApp = () => {
@@ -83,7 +85,7 @@ class PixiExample {
 
   updateItems = () => {
     this.particleContainer.children.forEach(sprite => {
-      const iteration = this.iter + sprite.baseScale * this.settings.scalePeriod;
+      const iteration = this.time + sprite.baseScale * this.settings.scalePeriod;
       const amplitude = 0.8;
       const period = this.settings.scalePeriod;
 
@@ -93,8 +95,11 @@ class PixiExample {
   }
 
   update = () => {
-    this.iter++;
+    if (window.APP.stats) window.APP.stats.begin();
+    this.time += (PIXI.Ticker.shared.elapsedMS / 1000);
+
     this.updateItems();
+    if (window.APP.stats) window.APP.stats.end();
   }
 }
 

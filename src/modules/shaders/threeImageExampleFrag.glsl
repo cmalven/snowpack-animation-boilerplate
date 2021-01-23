@@ -1,5 +1,5 @@
 uniform sampler2D imageTexture;
-uniform float iter;
+uniform float time;
 uniform vec2 currentMouse;
 varying vec2 vUv;
 varying vec3 vPosition;

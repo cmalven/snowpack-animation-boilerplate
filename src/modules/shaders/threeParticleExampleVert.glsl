@@ -1,6 +1,6 @@
 attribute float size;
 attribute float index;
-uniform float iter;
+uniform float time;
 uniform float minSize;
 uniform float maxSize;
 uniform vec2 currentMouse;
@@ -9,6 +9,8 @@ varying vec3 vPosition;
 varying vec3 vColor;
 
 // From THREE…
+// uniform mat4 projectionMatrix;
+// uniform mat4 modelViewMatrix;
 // uniform vec3 cameraPosition;
 // attribute vec3 position;
 // attribute vec2 uv;
@@ -24,7 +26,7 @@ float map_to_range(float value, float inMin, float inMax, float outMin, float ou
 void main() {
   vec3 adjustedPosition = vec3(
     position.x,
-    position.y + sin(iter * 0.02 + index) * pow(1.1, size * 10.0),
+    position.y + sin(time * 2.0 + index) * pow(1.1, size * 10.0),
     position.z
   );
 

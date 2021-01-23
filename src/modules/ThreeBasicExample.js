@@ -11,7 +11,10 @@ class ThreeBasicExample {
   }) {
     this.options = options;
     this.appContainer = document.querySelector(this.options.appContainerSelector);
-    this.iter = 0;
+
+    // Time
+    this.clock = new THREE.Clock();
+    this.time = 0;
 
     // THREE items
     this.renderer;
@@ -23,7 +26,7 @@ class ThreeBasicExample {
     // Settings
     this.settings = {
       cameraDistance: 5,
-      scalePeriod: 500,
+      scalePeriod: 8,
       bgColor: 0x212322,
     };
 
@@ -43,7 +46,7 @@ class ThreeBasicExample {
     const folder = window.APP.gui.setFolder('ThreeExample');
     folder.open();
 
-    window.APP.gui.add(this.settings, 'scalePeriod', 1, 1000);
+    window.APP.gui.add(this.settings, 'scalePeriod', 0.5, 20);
   }
 
   createApp = () => {
@@ -98,18 +101,20 @@ class ThreeBasicExample {
   }
 
   updateItems = () => {
-    const iteration = this.iter;
+    const time = this.time;
     const amplitude = 0.3;
     const period = this.settings.scalePeriod;
 
     const baseScale = 0.4;
-    const scaleEffect = baseScale + amplitude * Math.sin((Math.PI * 2) * (iteration / period));
+    const scaleEffect = baseScale + amplitude * Math.sin((Math.PI * 2) * (time / period));
     this.mesh.scale.set(scaleEffect, scaleEffect, scaleEffect);
   }
 
   update = () => {
-    this.iter++;
+    this.time = this.clock.getElapsedTime();
+
     this.updateItems();
+
     this.renderer.render(this.scene, this.camera);
     window.requestAnimationFrame(this.update);
 
