@@ -12,9 +12,12 @@ void main() {
   float v = vUv.y;
   vec2 newUv = vec2(u, v);
 
-  float r = texture2D(imageTexture, newUv).r;
-  float g = texture2D(imageTexture, newUv).g;
-  float b = texture2D(imageTexture, newUv).b;
+    // Add highlight based on z position
+  float zHighlight = vPosition.z * 0.02;
+
+  float r = texture2D(imageTexture, newUv).r + zHighlight;
+  float g = texture2D(imageTexture, newUv).g + zHighlight;
+  float b = texture2D(imageTexture, newUv).b + zHighlight;
 
   vec3 texture = vec3(r, g, b);
 
