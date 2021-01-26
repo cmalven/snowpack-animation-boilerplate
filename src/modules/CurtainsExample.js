@@ -90,8 +90,13 @@ class CurtainsExample {
     if (window.APP.stats) window.APP.stats.begin();
 
     this.plane.uniforms.time.value++;
-    this.plane.uniforms.distortPeriod.value = this.settings.distortPeriod;
-    this.plane.uniforms.distortStrength.value = this.settings.distortStrength;
+
+    // Update every uniform with a matching setting
+    Object.entries(this.plane.uniforms).forEach(([name]) => {
+      if (this.settings[name]) {
+        this.plane.uniforms[name].value = this.settings[name];
+      }
+    });
 
     if (window.APP.stats) window.APP.stats.end();
   }
