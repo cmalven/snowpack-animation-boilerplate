@@ -12,7 +12,6 @@ class CurtainsExample {
   }) {
     this.options = options;
     this.container = document.querySelector(this.options.containerSelector);
-    this.planeContainer = null;
 
     // Settings
     this.settings = {
