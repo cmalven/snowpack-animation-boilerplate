@@ -7,6 +7,8 @@ attribute vec2 aTextureCoord;
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform float uTime;
+uniform float uDistortPeriod;
+uniform float uDistortStrength;
 uniform mat4 uTextureMatrix0;
 varying vec3 vVertexPosition;
 varying vec2 vTextureCoord;

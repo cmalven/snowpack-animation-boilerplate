@@ -5,6 +5,8 @@ precision mediump float;
 varying vec3 vVertexPosition;
 varying vec2 vTextureCoord;
 uniform float uTime;
+uniform float uDistortPeriod;
+uniform float uDistortStrength;
 uniform sampler2D uSampler0;
 
 void main() {
@@ -13,7 +15,7 @@ void main() {
   vec2 newUv = vec2(u, v);
 
   // Distort texture
-  newUv.x += sin(newUv.y * 25.0) * cos(newUv.x * 25.0) * (cos(uTime / 50.0)) / 25.0;
+  newUv.x += sin(newUv.y * uDistortStrength) * cos(newUv.x * uDistortStrength) * (cos(uTime / uDistortPeriod)) / uDistortStrength;
 
   // Add highlight based on z position
   float zHighlight = vVertexPosition.z * 1.0;

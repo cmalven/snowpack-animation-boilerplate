@@ -15,7 +15,8 @@ class CurtainsExample {
 
     // Settings
     this.settings = {
-      scalePeriod: 5,
+      distortPeriod: 35,
+      distortStrength: 25,
     };
 
     this.init();
@@ -33,7 +34,8 @@ class CurtainsExample {
     const folder = window.APP.gui.setFolder('CurtainsExample');
     folder.open();
 
-    window.APP.gui.add(this.settings, 'scalePeriod', 0.5, 20);
+    window.APP.gui.add(this.settings, 'distortPeriod', 10, 50);
+    window.APP.gui.add(this.settings, 'distortStrength', 5, 100);
   }
 
   createMarkup = () => {
@@ -66,6 +68,16 @@ class CurtainsExample {
           type: '1f',
           value: 0,
         },
+        distortPeriod: {
+          name: 'uDistortPeriod',
+          type: '1f',
+          value: this.settings.distortPeriod,
+        },
+        distortStrength: {
+          name: 'uDistortStrength',
+          type: '1f',
+          value: this.settings.distortStrength,
+        },
       },
     };
 
@@ -78,6 +90,8 @@ class CurtainsExample {
     if (window.APP.stats) window.APP.stats.begin();
 
     this.plane.uniforms.time.value++;
+    this.plane.uniforms.distortPeriod.value = this.settings.distortPeriod;
+    this.plane.uniforms.distortStrength.value = this.settings.distortStrength;
 
     if (window.APP.stats) window.APP.stats.end();
   }
