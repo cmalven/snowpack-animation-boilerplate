@@ -11,10 +11,14 @@ $mq-breakpoints: (
   full: 1440px,
 );
 
+// General purposes canvas container - applies to all examples
+
 [data-app-container] {
-  width: 80vmin;
-  height: 80vmin;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
   > canvas {
     position: absolute;

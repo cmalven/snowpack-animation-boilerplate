@@ -14,6 +14,10 @@ class PixiExample {
     this.app = null;
     this.particleContainer = null;
 
+    // Set an arbitrary size for purposes of scaling the scene
+    this.width = 2000;
+    this.height = 2000;
+
     // Time
     this.time = 0;
 
@@ -48,6 +52,15 @@ class PixiExample {
     });
     this.appContainer.appendChild(this.app.view);
     this.app.ticker.add(this.update);
+
+    // Resize the renderer on window resize
+    window.addEventListener('resize', () => {
+      this.app.renderer.resize(this.appContainer.offsetWidth, this.appContainer.offsetHeight);
+      const scale = Math.max(this.app.view.width / this.width, this.app.view.height / this.height);
+      this.app.stage.scale.set(scale, scale);
+      this.app.stage.position.set(this.app.view.width/2, this.app.view.height/2);
+    }, true);
+    window.dispatchEvent(new Event('resize'));
   }
 
   createItems = () => {
@@ -76,8 +89,8 @@ class PixiExample {
       const sprite = new PIXI.Sprite(spriteTexture);
       sprite.baseScale = Math.random();
       sprite.anchor.set(0.5, 0.5);
-      sprite.position.x = Math.random() * this.app.view.width;
-      sprite.position.y = Math.random() * this.app.view.height;
+      sprite.position.x = (Math.random() - 0.5) * this.width;
+      sprite.position.y = (Math.random() - 0.5) * this.height;
       sprite.tint = PIXI.utils.string2hex(randColor);
       this.particleContainer.addChild(sprite);
     }
