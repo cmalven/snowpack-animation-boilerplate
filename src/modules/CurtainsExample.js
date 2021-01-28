@@ -13,10 +13,15 @@ class CurtainsExample {
     this.options = options;
     this.container = document.querySelector(this.options.containerSelector);
 
+    // Mouse
+    this.currentMouse = { x: 0, y: 0 };
+    this.targetMouse = { x: 0, y: 0 };
+
     // Settings
     this.settings = {
       distortPeriod: 35,
       distortStrength: 25,
+      mouseEase: 0.05,
     };
 
     this.init();
@@ -25,6 +30,7 @@ class CurtainsExample {
   init = () => {
     this.createGui();
     this.createMarkup();
+    this.addEventListeners();
     this.setup();
   }
 
@@ -36,6 +42,7 @@ class CurtainsExample {
 
     window.APP.gui.add(this.settings, 'distortPeriod', 10, 50);
     window.APP.gui.add(this.settings, 'distortStrength', 5, 100);
+    window.APP.gui.add(this.settings, 'mouseEase', 0.001, 1);
   }
 
   createMarkup = () => {
@@ -68,6 +75,11 @@ class CurtainsExample {
           type: '1f',
           value: 0,
         },
+        mouse: {
+          name: 'uMouse',
+          type: '2f',
+          value: [this.currentMouse.x, this.currentMouse.y],
+        },
         distortPeriod: {
           name: 'uDistortPeriod',
           type: '1f',
@@ -86,6 +98,27 @@ class CurtainsExample {
     this.plane.onRender(this.update);
   }
 
+  addEventListeners = () => {
+    document.body.addEventListener('mousemove', this.onMouseMove);
+  }
+
+  onMouseMove = evt => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    this.targetMouse = {
+      x: (evt.clientX / w) * 2 - 1,
+      y: -(evt.clientY / h) * 2 + 1,
+    };
+  }
+
+  updateMouse = () => {
+    const mouseDiffX = (this.targetMouse.x - this.currentMouse.x) * this.settings.mouseEase;
+    const mouseDiffY = (this.targetMouse.y - this.currentMouse.y) * this.settings.mouseEase;
+
+    this.currentMouse.x += mouseDiffX;
+    this.currentMouse.y += mouseDiffY;
+  }
+
   update = () => {
     if (window.APP.stats) window.APP.stats.begin();
 
@@ -97,6 +130,10 @@ class CurtainsExample {
         this.plane.uniforms[name].value = this.settings[name];
       }
     });
+
+    // Update mouse uniform
+    this.updateMouse();
+    this.plane.uniforms.mouse.value = [this.currentMouse.x, this.currentMouse.y];
 
     if (window.APP.stats) window.APP.stats.end();
   }
